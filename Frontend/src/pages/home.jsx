@@ -3,6 +3,7 @@ import Navbar from "../components/navbar";
 import {animate, AnimatePresence, motion, useInView} from "framer-motion";
 import movie_bg from "../assets/movie-bg.jpg";
 import movie_bg_2 from "../assets/movie-bg-2.jpg";
+import movie_bg_3 from "../assets/movie-bg-3.jpg";
 import Footer from "../components/footer";
 
 function Home(){
@@ -161,14 +162,7 @@ function Home(){
     return(
         <div>
             <Navbar/>
-            <motion.div className="dark:bg-slate-200 opacity-80 justify-center m-5" ref={ref} variants={itemVarient} initial="hidden" animate={isInView ? "visible" : "hidden"}>
-                <motion.h1 className="text-6xl text-green-800 text-center my-10 mx-5 mb-0 p-10" ><strong>Welcome to MovieStore!</strong></motion.h1>
-                 <motion.p className="dark:bg-slate-200 text-lg text-gray-700 text-center m-5 p-16 pt-0">
-                Step into a world of cinematic brilliance at MovieStore, where stories come to life and unforgettable moments are just a click away. From timeless classics that have shaped generations to the latest blockbuster hits redefining the art of filmmaking, we bring you a carefully curated collection of movies across every genre imaginable. Whether you're in the mood for a heartwarming romance, an adrenaline-pumping action thriller, or a thought-provoking drama, MovieStore has something special for everyone. Immerse yourself in the magic of storytelling, relive your favorite scenes, discover hidden gems, and experience the wonder of cinema like never before. Your perfect movie night starts right here with us.
-                </motion.p>
 
-            </motion.div>
-           
             <motion.div className="m-5 mb-0"
             ref={ref} 
             variants={itemVarient} 
@@ -180,11 +174,11 @@ function Home(){
                 backgroundPosition: 'center'
             }}
             >
-                <motion.h1 className="text-white bg-slate-700 bg-opacity-30 text-5xl m-0 py-5 text-center"><strong>Explore Genres!</strong></motion.h1>
+                <motion.h1 className="text-white bg-slate-700 bg-opacity-30 text-5xl m-0 py-5 pt-0 text-center"><strong>Explore Genres!</strong></motion.h1>
                 <motion.div className="flex flex-row justify-center p-5 space-x-6">
                 <motion.div
                     key={genres[currentGenre].id}
-                    className="flex w-full justify-center space-x-4 p-3 shadow-xl rounded-lg text-lg"
+                    className="flex w-full justify-center space-x-4 p-3 pb-0 shadow-xl rounded-lg text-lg"
                     variants={slideVarients}
                     initial="initial"
                     animate="animate"
@@ -216,16 +210,23 @@ function Home(){
                 </motion.div>
             </motion.div>
            
+           <motion.div className="dark:bg-slate-200 opacity-80 justify-center m-5 mt-1" ref={ref} variants={itemVarient} initial="hidden" animate={isInView ? "visible" : "hidden"}>
+                <motion.h1 className="text-6xl text-green-800 text-center my-10 mx-5 mb-0 p-10" ><strong>Welcome to MovieStore!</strong></motion.h1>
+                 <motion.p className="dark:bg-slate-200 text-lg text-gray-700 text-center m-5 p-16 pt-0">
+                Step into a world of cinematic brilliance at MovieStore, where stories come to life and unforgettable moments are just a click away. From timeless classics that have shaped generations to the latest blockbuster hits redefining the art of filmmaking, we bring you a carefully curated collection of movies across every genre imaginable. Whether you're in the mood for a heartwarming romance, an adrenaline-pumping action thriller, or a thought-provoking drama, MovieStore has something special for everyone. Immerse yourself in the magic of storytelling, relive your favorite scenes, discover hidden gems, and experience the wonder of cinema like never before. Your perfect movie night starts right here with us.
+                </motion.p>
+
+            </motion.div>
 
             <motion.div className="m-5 mb-0"
              style={{
-                backgroundImage: `url(${movie_bg})`,
+                backgroundImage: `url(${movie_bg_3})`,
                 backgroundSize: 'cover',
                 backgroundPosition: 'center'
             }}
             >
                 <motion.h1 className="text-slate-800 bg-slate-400 bg-opacity-40 text-5xl m-0 py-10 text-center" variants={itemVarient}><strong>Check Our Movie Collection!</strong></motion.h1>
-                <motion.div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-x-10 gap-y-10 px-10 py-20 mx-5"
+                <motion.div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-x-10 gap-y-10 px-10 py-20 mx-5"
                     initial={{opacity:0, y: 30}}
                     animate={{opacity:1, y: 0, transition: {duration: 0.5, ease: "easeOut"}}}
                 

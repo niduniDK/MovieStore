@@ -26,11 +26,11 @@ function Footer(){
                     <h1 className="text-4xl text-green-950 m-5 mx-10 ml-5"><strong>MovieStore</strong></h1>
                 </div>
                 <div className="justify-center absolute right-6">
-                    <p className="text-sm text-gray-700 m-2 mr-5">moviestore@gmail.com</p>
-                    <p className="text-sm text-gray-700 m-2 mr-5">123 Movie St, Film City, Sri Lanka</p>
-                    <p className="text-sm text-gray-700 m-2 mr-5">+94 (123) 456-7890</p>
+                    <p className="text-sm text-gray-700 m-2 mt-5 mr-20">moviestore@gmail.com</p>
+                    <p className="text-sm text-gray-700 m-2 mr-20">123 Movie St, Film City, Sri Lanka</p>
+                    <p className="text-sm text-gray-700 m-2 mb-5 mr-20">+94 (123) 456-7890</p>
                 </div>
-                <p className="text-sm text-gray-700 mx-72 my-10 text-center">&copy; 2023 MovieStore. All rights reserved.</p>
+                <p className="text-sm text-gray-700 mx-72 my-10 text-center">&copy; 2025 MovieStore. All rights reserved.</p>
             </motion.div>
             
             
