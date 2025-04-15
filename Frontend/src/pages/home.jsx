@@ -5,6 +5,32 @@ import movie_bg from "../assets/movie-bg.jpg";
 import movie_bg_2 from "../assets/movie-bg-2.jpg";
 import movie_bg_3 from "../assets/movie-bg-3.jpg";
 import Footer from "../components/footer";
+import { useNavigate } from "react-router-dom";
+
+const Movie = ({ movie, itemVariants }) => {
+        const ref = useRef(null);
+        const isInView = useInView(ref, { once: true });
+    
+        return (
+            <motion.div
+                ref={ref}
+                className="bg-slate-200 opacity-80 shadow-lg rounded-xl px-10 py-6 w-full max-w-full mx-auto"
+                variants={itemVariants}
+                initial="hidden"
+                animate={isInView ? "visible" : "hidden"}
+                style={{
+                    zIndex:1
+                }}
+            >
+                <h1 className="text-3xl text-center text-green-900 p-3 m-2"><strong>{movie.name}</strong></h1>
+                <p className="text-xl text-center text-green-800 p-3 m-2">{movie.description}</p>
+                <div className="flex flex-row justify-between items-center m-5">
+                    <button className="items-center p-2 mx-5 m-2 bg-green-700 text-white rounded-lg">Watch Online</button>
+                    <button className="items-center p-2 mx-5 m-2 bg-green-900 text-white rounded-lg">Add to Cart</button>
+                </div>
+            </motion.div>
+        );
+    };
 
 function Home(){
 
@@ -120,30 +146,7 @@ function Home(){
     const ref = useRef(null);
     const isInView = useInView(ref, {once: false});
 
-    const Movie = ({ movie, itemVariants }) => {
-        const ref = useRef(null);
-        const isInView = useInView(ref, { once: true });
     
-        return (
-            <motion.div
-                ref={ref}
-                className="bg-slate-200 opacity-80 shadow-lg rounded-xl px-10 py-6 w-full max-w-full mx-auto"
-                variants={itemVariants}
-                initial="hidden"
-                animate={isInView ? "visible" : "hidden"}
-                style={{
-                    zIndex:1
-                }}
-            >
-                <h1 className="text-4xl text-center text-green-900 p-3 m-2"><strong>{movie.name}</strong></h1>
-                <p className="text-2xl text-center text-green-800 p-3 m-2">{movie.description}</p>
-                <div className="flex flex-row justify-between items-center m-5">
-                    <button className="items-center p-2 mx-5 m-2 bg-green-700 text-white rounded-lg">Watch Online</button>
-                    <button className="items-center p-2 mx-5 m-2 bg-green-900 text-white rounded-lg">Add to Cart</button>
-                </div>
-            </motion.div>
-        );
-    };
 
     useEffect(() => {
         const interval = setInterval(() => {
@@ -158,6 +161,8 @@ function Home(){
         }, 5000);
         return () => clearInterval(interval);
     }, []);
+
+    const navigate = useNavigate();
 
     return(
         <div>
@@ -174,7 +179,7 @@ function Home(){
                 backgroundPosition: 'center'
             }}
             >
-                <motion.h1 className="text-white bg-slate-700 bg-opacity-30 text-5xl m-0 py-5 pt-0 text-center"><strong>Explore Genres!</strong></motion.h1>
+                <motion.h1 className="text-white bg-slate-700 bg-opacity-30 text-5xl m-0 py-5 pt-5 text-center"><strong>Explore Genres!</strong></motion.h1>
                 <motion.div className="flex flex-row justify-center p-5 space-x-6">
                 <motion.div
                     key={genres[currentGenre].id}
@@ -199,7 +204,11 @@ function Home(){
                                 <div className="dark:bg-slate-300 p-2 m-5 rounded-lg" key={genre.id}>
                                     <h1 className="text-3xl text-center text-green-900 p-2 m-2"><strong>{genre.name}</strong></h1>
                                     <div className="flex flex-row justify-between items-center m-5">
-                                        <button className="items-center justify-center p-2 mx-3 m-2 bg-green-900 text-white rounded-lg">Check Movies</button>
+                                        <button className="items-center justify-center p-2 mx-3 m-2 bg-green-900 text-white rounded-lg"
+                                        onClick={() => {
+                                            navigate('/movielist', {state: {genre: genre.name}})
+                                        }}
+                                        >Check Movies</button>
                                     </div>
                                 </div>
                             </motion.div>
@@ -255,3 +264,4 @@ function Home(){
 }
 
 export default Home;
+export {Movie};
