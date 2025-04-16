@@ -32,7 +32,7 @@ class Movie(BaseModel):
 @router.get('/movie_list', response_model=List[Movie])
 def get_movies_list():
     all_movies = []
-    chunk_size = 10000  # or 5000, or 2000 depending on memory
+    chunk_size = 10000 
 
     for chunk in pd.read_csv(file_path, sep='\t', usecols=['tconst', 'primaryTitle', 'startYear', 'runtimeMinutes', 'genres'],
                              dtype=str, chunksize=chunk_size):
