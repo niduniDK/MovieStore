@@ -17,7 +17,6 @@ class Movie(BaseModel):
     name: str
     year: Optional[str]
     genres: List[str]
-    duration: Optional[str]
     poster: Optional[str]
     class Config:
         from_attributes = True
@@ -53,7 +52,6 @@ def get_movies_list():
             id=movie['id'],
             name=movie['title'],
             year=movie.get('release_date', '')[:4],
-            duration=None,  # requires a separate call to /movie/{id} if you want runtime
             genres=genre_names,
             poster=poster_url
         ))
@@ -94,7 +92,6 @@ def get_movies_by_genre(genre: str):
             id=movie['id'],
             name=movie['title'],
             year=movie.get('release_date', '')[:4],
-            duration=None,  # optional: fetch individually if needed
             genres=genre_names,
             poster=poster_url
         ))
