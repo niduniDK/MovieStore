@@ -26,6 +26,7 @@ coverage.xml
 # Ignore database files
 *.sqlite3
 *.db
+data-files
 
 # Ignore dependency directories
 *.egg-info/

@@ -6,6 +6,7 @@ import movie_bg_2 from "../assets/movie-bg-2.jpg";
 import movie_bg_3 from "../assets/movie-bg-3.jpg";
 import Footer from "../components/footer";
 import { useNavigate } from "react-router-dom";
+import axios from 'axios';
 
 const Movie = ({ movie, itemVariants }) => {
         const ref = useRef(null);
@@ -23,7 +24,9 @@ const Movie = ({ movie, itemVariants }) => {
                 }}
             >
                 <h1 className="text-3xl text-center text-green-900 p-3 m-2"><strong>{movie.name}</strong></h1>
-                <p className="text-xl text-center text-green-800 p-3 m-2">{movie.description}</p>
+                <p className="text-xl text-center text-green-800 p-3 m-2">Release year: {movie.year}</p>
+                <p className="text-xl text-center text-green-800 p-3 m-2">Duration: {movie.duration}</p>
+                <p className="text-xl text-center text-green-800 p-3 m-2">Genres: {movie.genres && movie.genres.join(", ")}</p>
                 <div className="flex flex-row justify-between items-center m-5">
                     <button className="items-center p-2 mx-5 m-2 bg-green-700 text-white rounded-lg">Watch Online</button>
                     <button className="items-center p-2 mx-5 m-2 bg-green-900 text-white rounded-lg">Add to Cart</button>
@@ -34,79 +37,15 @@ const Movie = ({ movie, itemVariants }) => {
 
 function Home(){
 
-    const movies = [
-        {
-            id: 1,
-            name: "Movie 1",
-            description: "Description of Movie 1"
-        },
-        {
-            id: 2,
-            name: "Movie 2",
-            description: "Description of Movie 2"
-        },
-        {
-            id: 3,
-            name: "Movie 3",
-            description: "Description of Movie 3"
-        },
-        {
-            id: 4,
-            name: "Movie 4",
-            description: "Description of Movie 4"
-        },
-        {
-            id: 5,
-            name: "Movie 5",
-            description: "Description of Movie 5"
-        }
-    ]
+    const dummyMovies = []
 
-    const genres = [
-        {
-            id: 1,
-            name: "Action"
-        },
-        {
-            id: 2,
-            name: "Comedy"
-        },
-        {
-            id: 3,
-            name: "Drama"
-        },
-        {
-            id: 4,
-            name: "Horror"
-        },
-        {
-            id: 5,
-            name: "Romance"
-        },
-        {
-            id: 6,
-            name: "Sci-Fi"
-        },
-        {
-            id: 7,
-            name: "Fantasy"
-        },
-        {
-            id: 8,
-            name: "Thriller"
-        },
-        {
-            id: 9,
-            name: "Adventure"
-        },
-        {
-            id: 10,
-            name: "Animation"
-        }
-    ]
+    const dummyGenres = []
+
+    const [genres, setGenres] = useState(dummyGenres);
 
     const  [currentGenre, setCurrentGenre] = useState(0);
     const [currentMovie, setCurrentMovie] = useState(0);
+    const [movies, setMovies] = useState(dummyMovies);
 
     const headerVarient = {
         hidden: {opacity:0, y: 30},
@@ -129,19 +68,23 @@ function Home(){
         exit: {opacity: 0, x: -100}
     }
 
-    const visibleGenres = [
+    const visibleGenres = genres.length > 0
+    ? [
         genres[currentGenre % genres.length],
         genres[(currentGenre + 1) % genres.length],
         genres[(currentGenre + 2) % genres.length],
         genres[(currentGenre + 3) % genres.length],
         genres[(currentGenre + 4) % genres.length],
     ]
-
-    const visibleMovies = [
+    : [];
+    
+    const visibleMovies = movies.length > 0
+    ?[
         movies[currentMovie % movies.length],
         movies[(currentMovie + 1) % movies.length],
         movies[(currentMovie + 2) % movies.length]
     ]
+    : [];
 
     const ref = useRef(null);
     const isInView = useInView(ref, {once: false});
@@ -149,11 +92,12 @@ function Home(){
     
 
     useEffect(() => {
+        if (genres.length === 0) return;
         const interval = setInterval(() => {
             setCurrentGenre((prev) => (prev+5) % genres.length);
         }, 5000);
         return () => clearInterval(interval);
-    }, []);
+    }, [genres]);
 
     useEffect(() => {
         const interval = setInterval(() => {
@@ -161,6 +105,30 @@ function Home(){
         }, 5000);
         return () => clearInterval(interval);
     }, []);
+
+    useEffect(() => {
+        console.log('Fetching genre list...');
+        axios.get('http://127.0.0.1:8000/genres/genrelist')
+        .then((response) => {
+            console.log(response.data);
+            setGenres(response.data);
+        })
+        .catch((error) => {
+            console.error('Error fetching genre list: ', error);
+        })
+    }, [genres]);
+
+    useEffect(() => {
+        console.log('Fetching movies list...');
+        axios.get('http://127.0.0.1:8000/movies/movie_list')
+        .then((response) => {
+            console.log(response.data);
+            setMovies(response.data);
+        })
+        .catch((error) => {
+            console.error('Error fetching movie list: ', error);
+        })
+    },[movies])
 
     const navigate = useNavigate();
 
@@ -182,20 +150,19 @@ function Home(){
                 <motion.h1 className="text-white bg-slate-700 bg-opacity-30 text-5xl m-0 py-5 pt-5 text-center"><strong>Explore Genres!</strong></motion.h1>
                 <motion.div className="flex flex-row justify-center p-5 space-x-6">
                 <motion.div
-                    key={genres[currentGenre].id}
                     className="flex w-full justify-center space-x-4 p-3 pb-0 shadow-xl rounded-lg text-lg"
-                    variants={slideVarients}
-                    initial="initial"
-                    animate="animate"
-                    exit="exit"
+                    variants={itemVarient}
+                    initial="hidden"
+                    animate="visible"
+                    exit="hidden"
                     transition={{ duration: 0.6 }}
                 >
                     <AnimatePresence mode="wait">
-                        {visibleGenres.map((genre) => (
+                        {genres.length > 0 && visibleGenres.filter(Boolean).map((genre) => (
                             <motion.div
                                 key={genre.id}
                                 className="flex w-full justify-center space-x-4 p-2 shadow-xl rounded-lg text-lg"
-                                variants={itemVarient}
+                                variants={slideVarients}
                                 initial="initial"
                                 animate="animate"
                                 exit="exit"
@@ -249,7 +216,7 @@ function Home(){
                     }}
                 >
                     
-                    {visibleMovies.map((movie) => (
+                    {movies.length > 0 && visibleMovies.map((movie) => (
                         <Movie key={movie.id} movie={movie} itemVariants={itemVarient}/>
                     ))}
                 </motion.div>
