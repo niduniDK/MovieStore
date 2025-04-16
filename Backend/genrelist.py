@@ -1,33 +1,33 @@
-import pandas as pd
+import requests
 from fastapi import APIRouter
 from pydantic import BaseModel
 from typing import List
 import os
+from dotenv import load_dotenv
+
+load_dotenv()
+
+TMDB_API_KEY = os.getenv('TMDB_API_KEY')
+TMDB_BASE_URL = "https://api.themoviedb.org/3"
 
 router = APIRouter()
 
 class Genre(BaseModel):
     id: int
     name: str
+
     class Config:
         from_attributes = True
 
 @router.get('/genrelist', response_model=List[Genre])
 def get_genre_list():
-    base_dir = os.path.dirname(os.path.abspath(__file__))
-    file_path = os.path.join(base_dir, 'data-files', 'title.basics.tsv.gz')
-
-    df = pd.read_csv(file_path, sep='\t', usecols=['genres'], dtype=str)
-    df.dropna(subset=['genres'], inplace=True)
-    all_genres = set()
-    for genre_list in df['genres']:
-        genres = genre_list.split(',')
-        all_genres.update(genres)
+    url = f"{TMDB_BASE_URL}/genre/movie/list"
+    params = {'api_key': TMDB_API_KEY, 'language': 'en-US'}
     
-    all_genres.discard('\\N')
+    response = requests.get(url, params=params)
+    response.raise_for_status()
 
-    genres_with_idx = [Genre(id=idx, name=genre) for idx, genre in enumerate(sorted(all_genres), start=1)]
+    genres_data = response.json().get('genres', [])
+    genres_list = [Genre(id=genre['id'], name=genre['name']) for genre in genres_data]
 
-    return genres_with_idx
-
-print(get_genre_list())
+    return genres_list
