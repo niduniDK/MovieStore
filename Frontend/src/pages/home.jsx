@@ -23,10 +23,14 @@ const Movie = ({ movie, itemVariants }) => {
                     zIndex:1
                 }}
             >
-                <h1 className="text-3xl text-center text-green-900 p-3 m-2"><strong>{movie.name}</strong></h1>
-                <p className="text-xl text-center text-green-800 p-3 m-2">Release year: {movie.year}</p>
-                <p className="text-xl text-center text-green-800 p-3 m-2">Duration: {movie.duration}</p>
-                <p className="text-xl text-center text-green-800 p-3 m-2">Genres: {movie.genres && movie.genres.join(", ")}</p>
+                <div className="flex flex-row justify-between items-center m-5">
+                    <div>
+                        <h1 className="text-3xl text-left text-green-900 p-3 m-2"><strong>{movie.name}</strong></h1>
+                        <p className="text-xl text-left text-green-800 p-3 m-2">Release year: {movie.year}</p>
+                        <p className="text-xl text-left text-green-800 p-3 m-2">Genres: {movie.genres && movie.genres.join(", ")}</p>
+                    </div>
+                    <img src={movie.poster} alt="" className="w-1/2"/>
+                </div>
                 <div className="flex flex-row justify-between items-center m-5">
                     <button className="items-center p-2 mx-5 m-2 bg-green-700 text-white rounded-lg">Watch Online</button>
                     <button className="items-center p-2 mx-5 m-2 bg-green-900 text-white rounded-lg">Add to Cart</button>
@@ -104,7 +108,7 @@ function Home(){
             setCurrentMovie((prev) => (prev+3) % movies.length);
         }, 5000);
         return () => clearInterval(interval);
-    }, []);
+    }, [movies]);
 
     useEffect(() => {
         console.log('Fetching genre list...');
@@ -116,7 +120,7 @@ function Home(){
         .catch((error) => {
             console.error('Error fetching genre list: ', error);
         })
-    }, [genres]);
+    }, []);
 
     useEffect(() => {
         console.log('Fetching movies list...');
@@ -128,7 +132,7 @@ function Home(){
         .catch((error) => {
             console.error('Error fetching movie list: ', error);
         })
-    },[movies])
+    },[])
 
     const navigate = useNavigate();
 
@@ -216,7 +220,7 @@ function Home(){
                     }}
                 >
                     
-                    {movies.length > 0 && visibleMovies.map((movie) => (
+                    {movies.length > 0 && visibleMovies.filter(Boolean).map((movie) => (
                         <Movie key={movie.id} movie={movie} itemVariants={itemVarient}/>
                     ))}
                 </motion.div>
