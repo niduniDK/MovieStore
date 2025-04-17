@@ -1,9 +1,47 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import movie_bg_3 from "../assets/movie-bg-3.jpg";
 import icon from "../assets/movie-clapper-open.png";
+import { useNavigate } from "react-router-dom";
 
 function Register() {
+
+  const navigate = useNavigate();
+
+  const handleRegister = () => {
+    fetch("http://127.0.0.1:8000/auth/register", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json"
+      },
+      body: JSON.stringify({
+        email: email,
+        username: username,
+        password: password
+      })
+    })
+    .then(response => {
+      if(!response.ok){
+        throw new Error("Network response was not ok");
+      }
+      return response.json();
+    })
+    .then(data => {
+      console.log('User added: ', data);
+      navigate('/home')
+      setEmail('')
+      setUsername('')
+      setPassword('')
+    })
+    .catch(error => {
+      console.error('Error adding user: ', error);
+    });
+  };
+
+  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+
   return (
     <motion.div
       style={{
@@ -40,6 +78,8 @@ function Register() {
               id="email"
               type="text"
               placeholder="Email Adress"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
               className="p-2 rounded border bg-slate-300 text-black border-gray-300"
             />
           </div>
@@ -55,6 +95,8 @@ function Register() {
               id="username"
               type="text"
               placeholder="Username"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
               className="p-2 rounded border bg-slate-300 text-black border-gray-300"
             />
           </div>
@@ -70,11 +112,15 @@ function Register() {
               id="password"
               type="password"
               placeholder="Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
               className="p-2 rounded border bg-slate-300 text-black border-gray-300"
             />
           </div>
 
-          <button className="bg-green-800 text-white p-3 rounded-lg mt-5">
+          <button className="bg-green-800 text-white p-3 rounded-lg mt-5"
+          onClick={({email, username, password}) => handleRegister({email, username, password})}
+          >
             Register
           </button>
 
