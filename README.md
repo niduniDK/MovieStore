@@ -36,6 +36,13 @@ Welcome to **MovieStore** — a modern, animated, and visually engaging movie st
   
 </p>
 
+<p align="center">
+  <em>Watch Movie page of MovieStore</em><br/><br/>
+  <img src=".\Frontend\src\assets\screen-image-7.png" alt="Landing Page" width="600">
+  <br>
+  
+</p>
+
 ---
 
 ## 🚀 Getting Started
