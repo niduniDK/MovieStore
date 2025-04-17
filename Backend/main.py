@@ -3,6 +3,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 import genrelist
 import watch_movie
+import user_authentication
 
 app = FastAPI()
 
@@ -15,6 +16,7 @@ app.add_middleware(
 
 app.include_router(genrelist.router, prefix='/genres', tags=['Genres'])
 app.include_router(watch_movie.router, prefix='/movies', tags=['Movies'])
+app.include_router(user_authentication.router, prefix='/auth', tags=['Authentication'])
 
 if __name__ == "__main__":
     import uvicorn
