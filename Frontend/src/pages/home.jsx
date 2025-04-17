@@ -28,9 +28,10 @@ const Movie = ({ movie, itemVariants }) => {
                     zIndex:1
                 }}
             >
-                <div className="flex flex-row justify-between items-center m-5">
+                <h1 className="text-3xl text-left text-green-900 p-3 m-2"><strong>{movie.name}</strong></h1>
+                <div className="flex flex-row justify-between items-center">
+                    
                     <div>
-                        <h1 className="text-3xl text-left text-green-900 p-3 m-2"><strong>{movie.name}</strong></h1>
                         <p className="text-xl text-left text-green-800 p-3 m-2">Release year: {movie.year}</p>
                         <p className="text-xl text-left text-green-800 p-3 m-2">Genres: {movie.genres && movie.genres.join(", ")}</p>
                     </div>
@@ -223,14 +224,14 @@ function Home(){
                                 exit="exit"
                                 transition={{ duration: 0.6 }}
                             >
-                                <div className="dark:bg-slate-300 p-2 m-5 rounded-lg" key={genre.id}>
-                                    <h1 className="text-3xl text-center text-green-900 p-2 m-2"><strong>{genre.name}</strong></h1>
+                                <div className="bg-slate-300 bg-opacity-90 p-2 m-5 rounded-lg" key={genre.id}>
+                                    <h1 className="text-3xl text-center text-green-950 p-2 m-2"><strong>{genre.name}</strong></h1>
                                     <div className="flex flex-row justify-between items-center m-5">
-                                        <button className="items-center justify-center p-2 mx-3 m-2 bg-green-900 text-white rounded-lg"
+                                        <button className="items-center justify-center w-full p-2 mx-2 m-2 bg-slate-300 hover:bg-green-900 text-green-950 hover:text-white text-center border-green-950 border-2 rounded-md"
                                         onClick={() => {
                                             navigate('/movielist', {state: {genre: genre.name}})
                                         }}
-                                        >Check Movies</button>
+                                        ><strong>Check Movies</strong></button>
                                     </div>
                                 </div>
                             </motion.div>
