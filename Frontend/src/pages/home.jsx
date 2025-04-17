@@ -38,9 +38,9 @@ const Movie = ({ movie, itemVariants }) => {
                         navigate('/watchonline', {state: {movie: movie}});
                     }}
                     >
-                        Watch Online
+                        View More
                     </button>
-                    <button className="items-center p-2 mx-5 m-2 bg-green-900 text-white rounded-lg">Add to Cart</button>
+                    <button className="items-center p-2 mx-5 m-2 bg-green-900 text-white rounded-lg">Watch Online</button>
                 </div>
             </motion.div>
         );
