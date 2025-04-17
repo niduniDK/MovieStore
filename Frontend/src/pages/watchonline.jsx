@@ -46,7 +46,7 @@ function WatchOnline(){
                 <button className="p-2 mx-0 my-10 w-full bg-green-900 text-white rounded-lg hover:bg-green-200 hover:text-green-950" onClick={handleWatchOnline}>Watch Online</button>
             </div>
                 
-                <div className="flex flex-col justify-center ml-5 p-5">
+                <div className="flex flex-col justify-center ml-5 p-5 w-1/2">
                     <h1 className="text-4xl text-black text-left m-2"><strong>{movie.name}</strong></h1>
                     <h3 className="text-lg text-black text-left m-2">Original Title: {movie.original_title}</h3>
                     <h3 className="text-lg text-black text-left m-2">Popularity: {movie.popularity}</h3>
