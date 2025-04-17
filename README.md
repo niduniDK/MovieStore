@@ -81,6 +81,8 @@ This project leverages the following technologies:
 
 ### 🚀 What's coming next?
 🎥 User preference based recommendation system
+
 ⛓️ Blockchain based smart transactions
+
 ---
 
