@@ -55,10 +55,9 @@ npm install
 
 ### ▶️ Run the app
 ```bash
-npm start
+npm run dev
 ```
 
-App will be running at http://localhost:8000/
 
 ### 📦 Tech Stack
 This project leverages the following technologies:
