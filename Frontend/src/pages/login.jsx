@@ -1,9 +1,55 @@
-import React from "react";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
 import movie_bg_3 from "../assets/movie-bg-3.jpg";
 import icon from "../assets/movie-clapper-open.png";
+import { useNavigate } from "react-router-dom";
 
 function Login() {
+
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+
+  const navigate = useNavigate();
+
+  const handleLogin = () => {
+    fetch(`http://127.0.0.1:8000/auth/login/${username}`, {
+      method: "GET",
+      headers: {
+        "content-type": "application/json",
+      },
+      // body: JSON.stringify({
+      //   username: username,
+      //   password: password,
+      // })
+    })
+    .then (response => {
+      if(!response.ok){
+        throw new Error("Network response was not ok");
+      }
+      return response.json()
+    })
+    .then(data => {
+      console.log('Fetched User Details:', data);
+      if(data.username === username && data.password === password){
+        console.log("Login successful!");
+        setUsername('');
+        setPassword('');
+        navigate("/home");
+      }
+      else{
+        setUsername('');
+        setPassword('');
+        navigate('/login');
+      }
+    })
+    .catch(error => {
+      console.error('Error fetching user details:', error);
+      setUsername('');
+      setPassword('');
+      navigate('/login');
+    });
+  };
+
   return (
     <motion.div
       style={{
@@ -39,6 +85,8 @@ function Login() {
               id="username"
               type="text"
               placeholder="Username"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
               className="p-2 rounded border bg-slate-300 text-black border-gray-300"
             />
           </div>
@@ -54,11 +102,15 @@ function Login() {
               id="password"
               type="password"
               placeholder="Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
               className="p-2 rounded border bg-slate-300 text-black border-gray-300"
             />
           </div>
 
-          <button className="bg-green-800 text-white p-3 rounded-lg mt-5">
+          <button className="bg-green-800 text-white p-3 rounded-lg mt-5"
+          onClick={handleLogin}
+          >
             Login
           </button>
 
