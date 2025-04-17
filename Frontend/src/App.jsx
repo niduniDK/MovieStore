@@ -6,6 +6,7 @@ import Login from './pages/login'
 import Register from './pages/register'
 import MovieList from './pages/movielist'
 import WatchOnline from './pages/watchonline'
+import SearchResults from './pages/searchresults'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -24,6 +25,7 @@ function App() {
           <Route path='/register' element={<Register/>}></Route>
           <Route path='/movielist' element={<MovieList/>}></Route>
           <Route path='/watchonline' element={<WatchOnline/>}></Route>
+          <Route path='/search' element={<SearchResults/>}></Route>
         </Routes>
       </Router>
     </StrictMode>
