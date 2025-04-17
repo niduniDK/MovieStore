@@ -133,3 +133,34 @@ def get_trailer(movie_id: int):
     else:
         return
     
+
+@router.get('/search/{title}', response_model=List[Movie])
+def get_searched_movies(title: str):
+    url = f"{TMDB_BASE_URL}/search/movie"
+    params = {'api_key': TMDB_API_KEY, 'query': title}
+    response = requests.get(url, params=params)
+    response.raise_for_status()
+    searched_movies = response.json().get('results', [])
+
+    movie_results = []
+
+    genre_mapping = fetch_genre_mapping()
+    
+    for movie in searched_movies:
+        poster_path = movie.get('poster_path')
+        poster_url = f"http://image.tmdb.org/t/p/w500{poster_path}" if poster_path else None
+        movie_results.append(Movie(
+            id=movie['id'],
+            name=movie['title'],
+            year=movie.get('release_date', '')[:4],
+            genres=[genre_mapping.get(gid, "Unknown") for gid in movie.get('genre_ids', [])],
+            poster=poster_url,
+            original_title=movie.get('original_title', ''),
+            overview=movie.get('overview', ''),
+            popularity=movie.get('popularity', 0.0),
+            release_date=movie.get('release_date', ''),
+            vote_average=movie.get('vote_average', 0.0),
+            vote_count=movie.get('vote_count', 0)
+        ))
+
+    return movie_results
