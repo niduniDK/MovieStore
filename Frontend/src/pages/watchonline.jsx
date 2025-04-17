@@ -41,7 +41,7 @@ function WatchOnline(){
                         allowFullScreen
                         className="w-full max-w-5xl aspect-video mt-32"
                         ></iframe>
-                    ) : <p>No Trailer Available</p>
+                    ) : <p className="text-black m-10">No Video Available</p>
                 }
                 <button className="p-2 mx-0 my-10 w-full bg-green-900 text-white rounded-lg hover:bg-green-200 hover:text-green-950" onClick={handleWatchOnline}>Watch Online</button>
             </div>
