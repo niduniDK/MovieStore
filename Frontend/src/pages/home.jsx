@@ -12,6 +12,10 @@ const Movie = ({ movie, itemVariants }) => {
         const ref = useRef(null);
         const isInView = useInView(ref, { once: true });
         const navigate = useNavigate();
+
+        const handleWatchOnline = () => {
+            window.location.href = `https://www.netflix.com/search?q=${encodeURIComponent(movie.name)}`;
+        }
     
         return (
             <motion.div
@@ -40,7 +44,7 @@ const Movie = ({ movie, itemVariants }) => {
                     >
                         View More
                     </button>
-                    <button className="items-center p-2 mx-5 m-2 bg-green-900 text-white rounded-lg">Watch Online</button>
+                    <button className="items-center p-2 mx-5 m-2 bg-green-900 text-white rounded-lg" onClick={handleWatchOnline}>Watch Online</button>
                 </div>
             </motion.div>
         );
