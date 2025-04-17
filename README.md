@@ -4,24 +4,79 @@ Welcome to **MovieStore** — a modern, animated, and visually engaging movie st
 
 ---
 
-## 📸 Demo
+## 📸 Screen Images
 
-> 🌐 **Live Preview:** 
+<p align="center">
+  <em>Login page of MovieStore</em><br/><br/>
+  <img src=".\Frontend\src\assets\screen-image-2.png" alt="Landing Page" width="600">
+  <br>
+
+</p>
+
+<p align="center">
+  <em>Sign-up page of MovieStore</em><br/><br/>
+  <img src=".\Frontend\src\assets\screen-image-1.png" alt="Landing Page" width="600">
+  <br>
+  
+</p>
+
+<p align="center">
+  <em>Landing page of MovieStore</em><br/><br/>
+  <img src=".\Frontend\src\assets\screen-image-3.png" alt="Landing Page" width="600">
+  <br>
+  
+</p>
+
+<p align="center">
+  <em>Movie browsing view</em><br/><br/>
+  <img src="\Frontend\src\assets\screen-image-4.png" alt="Movie List" width="600"><br/><br/>
+  <img src="\Frontend\src\assets\screen-image-5.png" alt="Movie List" width="600"><br/><br/>
+  <img src="\Frontend\src\assets\screen-image-6.png" alt="Movie List" width="600"><br/><br/>
+  <br>
+  
+</p>
+
 ---
 
-[![Watch the demo](Frontend\src\assets\screen-image-5.png)](https://drive.google.com/file/d/1H88he_AnmDFs5Xr2AA6aQLAvdLQ2N5SU/view?usp=sharing)
+## 🚀 Getting Started
 
-![App Screenshot](Frontend\src\assets\screen-image-1.png)
+### 📥 Clone the repository
 
-![App Screenshot](Frontend\src\assets\screen-image-2.png)
+```bash
+git clone https://github.com/niduniDK/MovieStore.git
+```
 
-![App Screenshot](Frontend\src\assets\screen-image-3.png)
+### 📦 Install dependencies
 
-![App Screenshot](Frontend\src\assets\screen-image-4.png)
+```bash
+cd Frontend
+npm install
+```
 
-![App Screenshot](Frontend\src\assets\screen-image-5.png)
+### ▶️ Run the app
+```bash
+npm start
+```
 
-![App Screenshot](Frontend\src\assets\screen-image-6.png)
+App will be running at http://localhost:8000/
+
+### 📦 Tech Stack
+This project leverages the following technologies:
+
+⚛️ React — Frontend framework for building dynamic user interfaces
+
+🎥 Framer Motion — React animation library for smooth transitions and interactive components
+
+🛠️ Truffle — Development framework for Ethereum smart contracts
+
+⛓️ Solidity — Smart contract programming language for Ethereum blockchain
+
+📝 JavaScript — Primary scripting language for frontend and smart contract interaction
+
+🚀 FastAPI — High-performance backend framework for building APIs in Python
+
+🗄️ MySQL — Relational database management system for persistent data storage
+
 
 
 ---
