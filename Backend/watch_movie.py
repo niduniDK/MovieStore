@@ -18,6 +18,12 @@ class Movie(BaseModel):
     year: Optional[str]
     genres: List[str]
     poster: Optional[str]
+    original_title: str
+    overview: str
+    popularity: float
+    release_date: str
+    vote_average: float
+    vote_count: int
     class Config:
         from_attributes = True
 
@@ -53,7 +59,13 @@ def get_movies_list():
             name=movie['title'],
             year=movie.get('release_date', '')[:4],
             genres=genre_names,
-            poster=poster_url
+            poster=poster_url,
+            original_title=movie.get('original_title', ''),
+            overview=movie.get('overview', ''),
+            popularity=movie.get('popularity', 0.0),
+            release_date=movie.get('release_date', ''),
+            vote_average=movie.get('vote_average', 0.0),
+            vote_count=movie.get('vote_count', 0)
         ))
 
     return all_movies
@@ -71,7 +83,7 @@ def get_movies_by_genre(genre: str):
     movies_data = []
     filtered_movies = []
     url = f"{TMDB_BASE_URL}/discover/movie"
-    for page in range(1, 20): 
+    for page in range(1, 5): 
         params = {
             'api_key': TMDB_API_KEY,
             'language': 'en-US',
@@ -93,7 +105,31 @@ def get_movies_by_genre(genre: str):
             name=movie['title'],
             year=movie.get('release_date', '')[:4],
             genres=genre_names,
-            poster=poster_url
+            poster=poster_url,
+            original_title=movie.get('original_title', ''),
+            overview=movie.get('overview', ''),
+            popularity=movie.get('popularity', 0.0),
+            release_date=movie.get('release_date', ''),
+            vote_average=movie.get('vote_average', 0.0),
+            vote_count=movie.get('vote_count', 0)
         ))
 
     return filtered_movies
+
+
+@router.get('/watch_movie/{movie_id}')
+def get_trailer(movie_id: int):
+    url = f"{TMDB_BASE_URL}/movie/{movie_id}/videos"
+    params = {'api_key':{TMDB_API_KEY}, 'language': 'en-US'}
+    response = requests.get(url, params=params)
+    video_data = response.json().get('results', [])
+    if not video_data:
+        return
+    for data in video_data:
+        if data.get('site') == 'YouTube' and data.get('type') == 'Trailer':
+            video_key =  data.get('key')
+            video_url = f"https://www.youtube.com/watch?v={video_key}"
+            return video_url
+    else:
+        return
+    
