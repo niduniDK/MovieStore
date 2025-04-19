@@ -15,6 +15,9 @@ def get_db():
 
 @router.post('/register')
 def register(user: UserCreate, db: Session = Depends(get_db)):
+    exisiting_user = db.query(User).filter(User.username == user.username).first()
+    if exisiting_user:
+        raise HTTPException(status_code=400, detail="Username already exists")
     user = User(
         username=user.username,
         email=user.email,
