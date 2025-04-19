@@ -34,6 +34,10 @@ function Register() {
       setPassword('')
     })
     .catch(error => {
+      setEmail('')
+      setUsername('')
+      setPassword('')
+      navigate('/register')
       console.error('Error adding user: ', error);
     });
   };

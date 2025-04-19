@@ -17,10 +17,6 @@ function Login() {
       headers: {
         "content-type": "application/json",
       },
-      // body: JSON.stringify({
-      //   username: username,
-      //   password: password,
-      // })
     })
     .then (response => {
       if(!response.ok){
@@ -88,6 +84,7 @@ function Login() {
               value={username}
               onChange={(e) => setUsername(e.target.value)}
               className="p-2 rounded border bg-slate-300 text-black border-gray-300"
+              required
             />
           </div>
 
@@ -105,6 +102,7 @@ function Login() {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               className="p-2 rounded border bg-slate-300 text-black border-gray-300"
+              required
             />
           </div>
 
