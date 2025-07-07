@@ -3,15 +3,22 @@ import { useLocation } from "react-router-dom";
 import axios from "axios";
 import Navbar from "../components/navbar";
 import Footer from "../components/footer";
+import ARViewer from "../components/ARViewer";
 
 function WatchOnline(){
 
     const location = useLocation();
     const movie = location.state?.movie
     const [trailerUrl, setTrailerUrl] = useState(null);
+    const [showAR, setShowAR] = useState(false);
 
     const handleWatchOnline = () => {
         window.location.href = `https://www.netflix.com/search?q=${encodeURIComponent(movie.name)}`;
+    }
+
+    const handleARView = () => {
+        setShowAR(true);
+        console.log(trailerUrl);
     }
 
     useEffect(() => {
@@ -27,7 +34,11 @@ function WatchOnline(){
     return(
         <div>
             <Navbar/>
-            <div className="flex flex-row my-0 pt-0 m-5 p-8 bg-slate-50 bg-opacity-80 h-screen">
+
+            {showAR ? (
+                <ARViewer url={trailerUrl.replace("watch?v=", "embed/")}/>
+            ) : (
+                <div className="flex flex-row my-0 pt-0 m-5 p-8 bg-slate-50 bg-opacity-80 h-screen">
             <div className="flex flex-col">
                 {
                     trailerUrl? (
@@ -44,6 +55,8 @@ function WatchOnline(){
                     ) : <p className="text-black m-10">No Video Available</p>
                 }
                 <button className="p-2 mx-0 my-10 w-full bg-green-900 text-white rounded-lg hover:bg-green-200 hover:text-green-950" onClick={handleWatchOnline}>Watch Online</button>
+                <button className="p-2 mx-0 my-10 w-full bg-green-900 text-white rounded-lg hover:bg-green-200 hover:text-green-950" onClick={handleARView}>AR View</button>
+    
             </div>
                 
                 <div className="flex flex-col justify-center ml-5 p-5 w-1/2">
@@ -56,6 +69,8 @@ function WatchOnline(){
                     <p className="text-lg text-black text-left m-2">{movie.overview}</p>
                 </div>
             </div>
+            )}
+            
             <Footer/>
         </div>
 
