@@ -62,12 +62,12 @@ function Login() {
       <div className="bg-slate-400 bg-opacity-80 rounded-lg p-10 w-1/3 flex flex-col items-center">
         <div className="flex flex-row justify-center items-center m-2">
           <img src={icon} alt="" className="w-12 h-auto mx-1" />
-          <h1 className="text-4xl text-green-950 m-2 ml-5 text-center">
+          <h1 className="text-4xl text-blue-950 m-2 ml-5 text-center">
             <strong>MovieStore</strong>
           </h1>
         </div>
 
-        <h1 className="text-3xl text-green-800 m-5 text-center"><strong>Login</strong></h1>
+        <h1 className="text-3xl text-blue-800 m-5 text-center"><strong>Login</strong></h1>
 
         <div className="flex flex-col w-full px-5">
           <div className="flex flex-col mb-4">
@@ -106,7 +106,7 @@ function Login() {
             />
           </div>
 
-          <button className="bg-green-800 text-white p-3 rounded-lg mt-5"
+          <button className="bg-blue-800 text-white p-3 rounded-lg mt-5"
           onClick={handleLogin}
           >
             Login
@@ -114,7 +114,7 @@ function Login() {
 
           <p className="text-sm text-gray-700 m-2 mt-5 text-center">
             Don't have an account?{" "}
-            <a href="/register" className="text-green-850 font-bold">
+            <a href="/register" className="text-blue-850 font-bold">
               Register here
             </a>
         </p>

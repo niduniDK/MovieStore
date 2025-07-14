@@ -13,17 +13,17 @@ function Footer(){
     }
 
     return(
-        <div className="flex flex-row bg-slate-200 p-3 m-5 mt-0 pt-0">
+        <div className="flex flex-row bg-slate-200 p-2 mt-0 pt-0">
             <motion.div
             ref={ref}
-            className="flex flex-row bg-slate-200 p-3 m-5 mt-0"
+            className="flex flex-row bg-slate-200 p-3 mx-5 mt-0"
             initial="hidden"
             animate={isInView ? "visible" : "hidden"}
             variants={itemVarient}
             >
                 <div className="flex flex-row p-3 mb-1 pb-0">
-                    <img src={icon} alt="" className="w-16 h-auto mx-2 mr-0"/>
-                    <h1 className="text-4xl text-green-950 m-5 mx-10 ml-5"><strong>MovieStore</strong></h1>
+                    <img src={icon} alt="" className="w-20 h-auto mx-2 mr-0"/>
+                    <h1 className="text-4xl text-blue-950 m-5 mx-10 ml-5"><strong>MovieStore</strong></h1>
                 </div>
                 <div className="justify-center absolute right-6">
                     <p className="text-sm text-gray-700 m-2 mt-5 mr-20">moviestore@gmail.com</p>

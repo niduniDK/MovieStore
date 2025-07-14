@@ -28,24 +28,24 @@ const Movie = ({ movie, itemVariants }) => {
                     zIndex:1
                 }}
             >
-                <h1 className="text-3xl text-left text-green-900 p-3 m-2"><strong>{movie.name}</strong></h1>
+                <h1 className="text-3xl text-left text-slate-700 p-3 m-2"><strong>{movie.name}</strong></h1>
                 <div className="flex flex-row justify-between items-center">
                     
                     <div>
-                        <p className="text-xl text-left text-green-800 p-3 m-2">Release year: {movie.year}</p>
-                        <p className="text-xl text-left text-green-800 p-3 m-2">Genres: {movie.genres && movie.genres.join(", ")}</p>
+                        <p className="text-xl text-left text-black p-3 m-2">Release year: {movie.year}</p>
+                        <p className="text-xl text-left text-black p-3 m-2">Genres: {movie.genres && movie.genres.join(", ")}</p>
                     </div>
                     <img src={movie.poster} alt="" className="w-1/2"/>
                 </div>
                 <div className="flex flex-row justify-between items-center m-5">
-                    <button className="items-center p-2 mx-5 m-2 bg-green-700 text-white rounded-lg"
+                    <button className="items-center p-2 mx-5 m-2 bg-blue-700 text-white rounded-lg"
                     onClick={() => {
                         navigate('/watchonline', {state: {movie: movie}});
                     }}
                     >
                         View More
                     </button>
-                    <button className="items-center p-2 mx-5 m-2 bg-green-900 text-white rounded-lg" onClick={handleWatchOnline}>Watch Online</button>
+                    <button className="items-center p-2 mx-5 m-2 bg-blue-900 text-white rounded-lg" onClick={handleWatchOnline}>Watch Online</button>
                 </div>
             </motion.div>
         );
@@ -154,7 +154,7 @@ function Home(){
         <div>
             <Navbar/>
 
-            <motion.div className="m-5 my-0"
+            <motion.div className=""
              style={{
                 backgroundImage: `url(${movie_bg_3})`,
                 backgroundSize: 'cover',
@@ -184,15 +184,15 @@ function Home(){
             </motion.div>
 
             
-           <motion.div className="dark:bg-slate-200 opacity-80 justify-center m-5 my-0" ref={ref} variants={itemVarient} initial="hidden" animate={isInView ? "visible" : "hidden"}>
-                <motion.h1 className="text-6xl text-green-800 text-center my-10 mx-5 mt-0 mb-0 p-10" ><strong>Welcome to MovieStore!</strong></motion.h1>
+           <motion.div className="dark:bg-slate-200 opacity-80 justify-center" ref={ref} variants={itemVarient} initial="hidden" animate={isInView ? "visible" : "hidden"}>
+                <motion.h1 className="text-6xl text-blue-800 text-center my-10 mx-5 mt-0 mb-0 p-10" ><strong>Welcome to MovieStore!</strong></motion.h1>
                  <motion.p className="dark:bg-slate-200 text-lg text-gray-700 text-center m-5 mt-0 mb-0 p-16 pt-0">
                 Step into a world of cinematic brilliance at MovieStore, where stories come to life and unforgettable moments are just a click away. From timeless classics that have shaped generations to the latest blockbuster hits redefining the art of filmmaking, we bring you a carefully curated collection of movies across every genre imaginable. Whether you're in the mood for a heartwarming romance, an adrenaline-pumping action thriller, or a thought-provoking drama, MovieStore has something special for everyone. Immerse yourself in the magic of storytelling, relive your favorite scenes, discover hidden gems, and experience the wonder of cinema like never before. Your perfect movie night starts right here with us.
                 </motion.p>
 
             </motion.div>
 
-            <motion.div className="m-5 my-0"
+            <motion.div className=""
             ref={ref} 
             variants={itemVarient} 
             initial="hidden" 
@@ -203,7 +203,7 @@ function Home(){
                 backgroundPosition: 'center'
             }}
             >
-                <motion.h1 className="text-white bg-slate-700 bg-opacity-30 text-5xl m-0 py-5 pt-5 text-center"><strong>Explore Genres!</strong></motion.h1>
+                <motion.h1 className="text-blue-50 bg-slate-500 text-5xl m-0 py-5 text-center"><strong>Explore Genres!</strong></motion.h1>
                 <motion.div className="flex flex-row justify-center p-5 space-x-6">
                 <motion.div
                     className="flex w-full justify-center space-x-4 p-3 pb-0 shadow-xl rounded-lg text-lg"
@@ -224,10 +224,10 @@ function Home(){
                                 exit="exit"
                                 transition={{ duration: 0.6 }}
                             >
-                                <div className="bg-slate-300 bg-opacity-90 p-2 m-5 rounded-lg" key={genre.id}>
-                                    <h1 className="text-3xl text-center text-green-950 p-2 m-2"><strong>{genre.name}</strong></h1>
+                                <div className="bg-slate-300 p-2 m-5 rounded-lg" key={genre.id}>
+                                    <h1 className="text-3xl text-center text-blue-950 p-2 m-2"><strong>{genre.name}</strong></h1>
                                     <div className="flex flex-row justify-between items-center m-5">
-                                        <button className="items-center justify-center w-full p-2 mx-2 m-2 bg-slate-300 hover:bg-green-900 text-green-950 hover:text-white text-center border-green-950 border-2 rounded-md"
+                                        <button className="items-center justify-center w-full p-2 mx-2 m-2 bg-blue-900 hover:bg-blue-100 text-blue-50 hover:text-blue-950 text-center border-blue-950 border-2 rounded-md"
                                         onClick={() => {
                                             navigate('/movielist', {state: {genre: genre.name}})
                                         }}

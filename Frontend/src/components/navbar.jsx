@@ -6,10 +6,10 @@ import SearchBar from './searchbar';
 
 function Navbar() {
   return (
-    <div className="flex flex-row bg-white items-center p-1 mb-0 my-2 m-5">
+    <div className="flex flex-row bg-white items-center p-1 mb-0 my-2">
       <Link to={'/#home'} className="flex flex-row bg-white items-center p-1 m-5">
         <img src={icon} alt="Movie icon" className="w-12 h-auto mx-3" />
-        <h1 className="text-4xl text-green-950 m-5 my-2 ml-1"><strong>MovieStore</strong></h1>
+        <h1 className="text-4xl text-blue-950 m-5 my-2 ml-1"><strong>MovieStore</strong></h1>
       </Link>
       <SearchBar/>
       <div className='flex flex-row'>

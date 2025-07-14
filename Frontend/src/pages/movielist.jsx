@@ -37,14 +37,14 @@ function MovieList(){
         <div>
             <Navbar/>
             <motion.div
-            className="m-5"
-            style={{
-                backgroundImage: `url(${movie_bg_3})`,
-                backgroundSize: "cover",
-                backgroundPosition: "center"
-            }}
+            className=" bg-slate-100"
+            // style={{
+            //     backgroundImage: `url(${movie_bg_3})`,
+            //     backgroundSize: "cover",
+            //     backgroundPosition: "center"
+            // }}
             >
-                <motion.h1 className="text-5xl bg-slate-500 bg-opacity-25 p-5 m-2 text-green-100 text-center"><strong>Check out {genre} Movies!</strong></motion.h1>
+                <motion.h1 className="text-5xl p-5 text-blue-900 text-center"><strong>Check out {genre} Movies!</strong></motion.h1>
                 <motion.div
                 className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-x-10 gap-y-10 px-10 py-20 mx-5"
                 initial={{opacity:0, y: 30}}
