@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-
+import video from '../assets/video.mp4';
 
 
 const ARViewer = ({ url }) => {
@@ -164,11 +164,13 @@ const ARViewer = ({ url }) => {
     if (!sceneReady) return;
 
     const iframe = document.getElementById('youtube-frame');
+    console.log(iframe ? 'YouTube iframe found' : 'YouTube iframe not found');
     if (!iframe) return;
 
     if (window.MINDAR) {
       // MindAR event handling
       const target = document.querySelector('[mindar-image-target]');
+      console.log(target ? 'MindAR target found' : 'MindAR target not found');
       if (!target) return;
 
       target.addEventListener('targetFound', () => {
@@ -181,6 +183,7 @@ const ARViewer = ({ url }) => {
         iframe.style.display = 'none';
         iframe.src = iframe.src; // reset video
       });
+      
     } else {
       // Fallback mode - show video after a delay
       console.log('MindAR not available, showing video in fallback mode');
@@ -193,28 +196,31 @@ const ARViewer = ({ url }) => {
   const embedUrl = url?.replace("watch?v=", "embed/") + "?autoplay=1&mute=1";
 
   return (
-    <div style={{ width: '100vw', height: '100vh' }}>
+    <div style={{ width: '96vw', height: '100vh', margin: '20px'}}>
       {scriptsLoaded && sceneReady && (
         <>
           {window.MINDAR ? (
             // Full AR Scene with MindAR
             <a-scene
-              mindar-image="imageTargetSrc: ./targets.mind; autoStart: true;"
+              mindar-image="imageTargetSrc: /targets.mind; autoStart: false;"
               embedded
               color-space="sRGB"
               renderer="colorManagement: true; physicallyCorrectLights"
               vr-mode-ui="enabled: false"
               device-orientation-permission-ui="enabled: true"
             >
-              <a-assets></a-assets>
-              <a-camera position="0 0 0" look-controls="enabled: true"></a-camera>
+              
+              <a-assets>
+                <img id='placeholder' src="placeholder.jpg" alt="" />
+              </a-assets>
+              <a-camera position="0 0 0" look-controls="enabled: true">{console.log("Camera")}</a-camera>
               <a-entity mindar-image-target="targetIndex: 0">
                 <a-plane
+                  src="#placeholder"
                   position="0 0 0"
                   width="1"
                   height="0.6"
-                  color="#ffffff"
-                  opacity="0.001"
+                  material="opacity: 0.001; transparent: true"
                 ></a-plane>
               </a-entity>
             </a-scene>
@@ -227,7 +233,7 @@ const ARViewer = ({ url }) => {
               vr-mode-ui="enabled: false"
             >
               <a-assets></a-assets>
-              <a-camera position="0 0 0" look-controls="enabled: true"></a-camera>
+              <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
               <a-box 
                 position="0 0 -3" 
                 rotation="0 45 0" 
@@ -250,7 +256,7 @@ const ARViewer = ({ url }) => {
               ></a-text>
             </a-scene>
           )}
-
+          {/* <video src={video}></video> */}
           <iframe
             id="youtube-frame"
             src={embedUrl}
@@ -265,9 +271,9 @@ const ARViewer = ({ url }) => {
               width: '320px',
               height: '180px',
               transform: 'translate(-50%, -50%)',
-              zIndex: 999,
+              zIndex: 0,
             }}
-          ></iframe>
+          >{console.log('Youtube video')}</iframe>
         </>
       )}
       {!scriptsLoaded && (
